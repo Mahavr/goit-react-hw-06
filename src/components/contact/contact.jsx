@@ -1,6 +1,9 @@
 import css from "./contact.module.css";
 import { AiOutlineContacts, AiOutlinePhone } from "react-icons/ai";
-export const Contact = ({  name, number , onDelete }) => {
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
+export const Contact = ({ item: { id, name, number } }) => {
+  const dispatch = useDispatch();
   return (
     <li className={css.item}>
       <div>
@@ -13,7 +16,10 @@ export const Contact = ({  name, number , onDelete }) => {
           <p className={css.text}>{number}</p>
         </div>
       </div>
-      <button className={css.button} onClick={onDelete}>
+      <button
+        className={css.button}
+        onClick={() => dispatch(deleteContact(id))}
+      >
         Delete
       </button>
     </li>
